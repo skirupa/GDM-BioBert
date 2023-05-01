@@ -6,6 +6,7 @@ const RelExt = () => {
         disease: '',
         mutation: '',
     });
+    const [isPresent, setIsPresent] = useState(null);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -25,8 +26,11 @@ const RelExt = () => {
             body: JSON.stringify(formData)
         })
             .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setIsPresent(data.isPresent)
+            })
             .catch(error => console.log(error))
-
     };
 
     return (
@@ -49,6 +53,17 @@ const RelExt = () => {
                 </div>
 
             </form>
+
+            {isPresent !== null && (
+                <div className="alert alert-dismissible fade show mt-3" role="alert">
+                    {isPresent ? "RELATION FOUND" : "RELATION NOT FOUND"}
+                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            )}
+
+
         </div>
     );
 };

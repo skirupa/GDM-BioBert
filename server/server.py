@@ -1,4 +1,4 @@
-from flask import Flask, request, json
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import psycopg2
 
@@ -23,8 +23,10 @@ def submit_form():
         print("Gene: ",gene)
         print("Disease: ",disease)
         print("Mutation: ",mutation)
-        queryDatabase(gene, disease, mutation)
-        return data
+        isPresent = queryDatabase(gene, disease, mutation)
+        response = {"isPresent": isPresent}
+        #print(response)
+        return response
         #return json.dumps({'gene': request.json['gene']})
         #SELECT EXISTS (SELECT 1 from (SELECT DISTINCT gd."Gene", gd."Disease", gm."Mutation" FROM gd INNER JOIN gm ON gd."Gene" = gm."Gene" AND gm."prediction" = 1 INNER JOIN dm ON gd."Disease" = dm."Disease" AND gm."Mutation" = dm."Mutation" AND dm."prediction" = 1 WHERE gd."prediction" = 1) as res where res."Gene"='B-Raf' and res."Disease"='tumours' and res."Mutation"='V600E')
     
@@ -49,7 +51,7 @@ def queryDatabase(gene, disease, mutation):
         print("Triplet does not exists in the table!!!")
 
     conn.close()
-    
+    return isPresent    
 
 
 if __name__ == '__main__':
