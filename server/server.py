@@ -58,12 +58,12 @@ def queryDatabase(gene, disease, mutation):
 @app.route('/fileUpload', methods=['POST'])
 def process_file():
     file = request.files['file']
-    file.save(os.path.join(app.config['UPLOAD_FOLDER'], "pmcid.txt"))
+    filename = "pmcid.txt"
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     return jsonify({'message': 'File saved successfully.'})
 
 if __name__ == '__main__':
     app.run(debug=True)
-
 
 
 

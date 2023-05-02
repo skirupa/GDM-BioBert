@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 const Data = () => {
     const [file, setFile] = useState(null);
+    const [uploadStatus, setUploadStatus] = useState(false);
+
 
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
@@ -16,7 +18,10 @@ const Data = () => {
             body: formData,
         })
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data);
+                setUploadStatus(true);
+            })
             .catch(error => console.error(error));
     };
 
@@ -27,6 +32,7 @@ const Data = () => {
                 <input type="file" className="form-control" id="file" accept=".txt" onChange={handleFileChange} />
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
+            {uploadStatus && <p> File upload complete! </p>}
         </form>
     );
 };
