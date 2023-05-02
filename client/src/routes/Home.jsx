@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -13,6 +14,22 @@ const Home = () => {
     return (
         <div>
             <Header />
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <h1 className="text-center">Welcome!</h1>
+                        <p className="text-center">Please choose an option:</p>
+                        <div className="d-flex justify-content-between">
+                            <button className="btn btn-primary btn-lg">
+                                <Link to='/RelationExtraction'>Relation Extraction</Link>
+                            </button>
+                            <button className="btn btn-secondary btn-lg">
+                                <Link to='/DatabasePopulate'>Database Population</Link>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

@@ -22,7 +22,7 @@ const RelExt = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            mode: 'cors',
+            //mode: 'cors',
             body: JSON.stringify(formData)
         })
             .then(response => response.json())

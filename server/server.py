@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import psycopg2
+import os
 
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = '../project-sample'
 CORS(app)
 
 @app.route('/submit', methods=['POST', 'OPTIONS'])
@@ -53,9 +55,15 @@ def queryDatabase(gene, disease, mutation):
     conn.close()
     return isPresent    
 
+@app.route('/fileUpload', methods=['POST'])
+def process_file():
+    file = request.files['file']
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'], "pmcid.txt"))
+    return jsonify({'message': 'File saved successfully.'})
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
+
 
 
 
