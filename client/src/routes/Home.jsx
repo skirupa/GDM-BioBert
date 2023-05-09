@@ -20,10 +20,10 @@ const Home = () => {
                         <h1 className="text-center">Welcome!</h1>
                         <p className="text-center">Please choose an option:</p>
                         <div className="d-flex justify-content-between">
-                            <button className="btn btn-primary btn-lg">
+                            <button className="btn-lg">
                                 <Link to='/RelationExtraction'>Relation Extraction</Link>
                             </button>
-                            <button className="btn btn-secondary btn-lg">
+                            <button className="btn-lg">
                                 <Link to='/DatabasePopulate'>Database Population</Link>
                             </button>
                         </div>

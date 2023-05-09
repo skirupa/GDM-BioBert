@@ -26,14 +26,17 @@ const Data = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} method='POST'>
-            <div className="mb-3">
-                <label htmlFor="file" className="form-label">Upload a text file</label>
-                <input type="file" className="form-control" id="file" accept=".txt" onChange={handleFileChange} />
-            </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
-            {uploadStatus && <p> File upload complete! </p>}
-        </form>
+        <div className="container p-5 mt-4" style={{ justifyContent: 'center', alignItems: 'center', height: '100vh', textAlign: 'center', backgroundColor: '#edf2f4' }}>
+            <h1 style={{ textAlign: "center" }}>DATABASE ENRICHER</h1>
+            <form onSubmit={handleSubmit} method='POST' style={{ textAlign: 'left', marginTop: '100px' }}>
+                <div className="mb-3">
+                    <label htmlFor="file" className="form-label" style={{}}>Upload a text file</label>
+                    <input type="file" className="form-control" id="file" accept=".txt" onChange={handleFileChange} />
+                </div>
+                <button type="submit" className="btn btn-primary">Submit</button>
+                {uploadStatus && <p> File upload complete! </p>}
+            </form>
+        </div>
     );
 };
 

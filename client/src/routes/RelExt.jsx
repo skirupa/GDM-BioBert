@@ -34,35 +34,38 @@ const RelExt = () => {
     };
 
     return (
-        <div className='mt=4'>
-            <h1 className='font-weight-light display-1 text-center'>
-                Relation Extraction
-            </h1>
-            <form action='' onSubmit={handleSubmit} method='POST'>
-                <div className='form-row'>
-                    <div className='col'>
+        <div className="container p-5 mt-4" style={{ justifyContent: 'center', alignItems: 'center', height: '100vh', textAlign: 'center', backgroundColor: '#edf2f4' }}>
+            <h1 style={{ textAlign: "center" }}>RELATION EXTRACTOR</h1>
+            <div className="container p-4 mt-4" style={{ justifyContent: 'left', alignItems: 'left', textAlign: 'left' }}>
+                <form action='' onSubmit={handleSubmit} method='POST'>
+                    <div class="form-group mt-4" style={{ fontWeight: 'bold', fontFamily: '' }}>
+                        <label for="formGroupExampleInput">GENE</label>
                         <input type="text" className='form-control' placeholder='Enter Gene here' name='gene' value={formData.gene} onChange={handleInputChange} />
                     </div>
-                    <div className='col'>
+                    <div class="form-group mt-4">
+                        <label for="formGroupExampleInput">DISEASE</label>
                         <input type="text" className='form-control' placeholder='Enter Disease here' name='disease' value={formData.disease} onChange={handleInputChange} />
                     </div>
-                    <div className='col'>
+                    <div class="form-group mt-4">
+                        <label for="formGroupExampleInput">MUTATION</label>
                         <input type="text" className='form-control' placeholder='Enter Mutation here' name='mutation' value={formData.mutation} onChange={handleInputChange} />
                     </div>
-                    <button className="btn btn primary" type='submit'>Find</button>
-                </div>
-
-            </form>
-
-            {isPresent !== null && (
-                <div className="alert alert-dismissible fade show mt-3" role="alert">
-                    {isPresent ? "RELATION FOUND" : "RELATION NOT FOUND"}
-                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            )}
-
+                    <button type="submit" class="btn btn-primary btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off">Find relation status</button>
+                </form>
+                {isPresent !== null && (
+                    <div className="justify-content-center mt-4">
+                        {isPresent ?
+                            <button type="button" className="btn btn-success btn-lg btn-block" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                <span class="label label-success">RELATION FOUND</span>
+                            </button>
+                            :
+                            <button type="button" className="btn btn-danger btn-lg btn-block" aria-pressed="true" data-dismiss="alert" aria-label="Close">
+                                <span class="label label-danger">RELATION NOT FOUND</span>
+                            </button>
+                        }
+                    </div>
+                )}
+            </div>
 
         </div>
     );
