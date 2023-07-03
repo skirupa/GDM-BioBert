@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const RelExt = () => {
     const [formData, setFormData] = useState({
@@ -7,6 +7,21 @@ const RelExt = () => {
         mutation: '',
     });
     const [isPresent, setIsPresent] = useState(null);
+    const [tableData, setTableData] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/displayTable', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                // console.log(data);
+                setTableData(data);
+            })
+            .catch(error => console.log(error))
+    }, []);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -34,7 +49,7 @@ const RelExt = () => {
     };
 
     return (
-        <div className="container p-5 mt-4" style={{ justifyContent: 'center', alignItems: 'center', height: '100vh', textAlign: 'center', backgroundColor: '#edf2f4' }}>
+        <div className="container p-5 mt-4" style={{ justifyContent: 'center', alignItems: 'center', height: '700vh', textAlign: 'center', backgroundColor: '#edf2f4' }}>
             <h1 style={{ textAlign: "center" }}>RELATION EXTRACTOR</h1>
             <div className="container p-4 mt-4" style={{ justifyContent: 'left', alignItems: 'left', textAlign: 'left' }}>
                 <form action='' onSubmit={handleSubmit} method='POST'>
@@ -65,7 +80,26 @@ const RelExt = () => {
                         }
                     </div>
                 )}
+                <table className="table mt-4">
+                    <thead>
+                        <tr>
+                            <th>Gene</th>
+                            <th>Disease</th>
+                            <th>Mutation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {tableData.map((row, index) => (
+                            <tr key={index}>
+                                <td>{row.Gene}</td>
+                                <td>{row.Disease}</td>
+                                <td>{row.Mutation}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
+
 
         </div>
     );
